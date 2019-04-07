@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">StackOverflow</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="sign_up_for_an_account">SIGN UP FOR AN ACCOUNT?</string>
+    <string name="welcome_to_stack_overflow">Welcome to Stack Overflow</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="stackoverflow_icon">Stackoverflow Icon</string>
+    <string name="success">success</string>
+
+    <string name="submit">Submit</string>
+    <string name="Open">Open</string>
+    <string name="Close">Close</string>
+    <string name="saved_questions">Saved Questions</string>
+    <string name="no_saved_questions">No Saved Questions</string>
+
+
+</resources>
