@@ -48,9 +48,9 @@ public class QuestionListActivity extends AppCompatActivity {
     private static final int MENU_THIRD = Menu.FIRST + 2;
     private static final int MENU_FOURTH = Menu.FIRST + 3;
     private static final String DATABASE_NAME = "questions_db";
+    public ProgressDialog progress;
     RecyclerView mRecyclerView;
     QuestionRecyclerAdapter mAdapter;
-    ProgressDialog progress;
     private SharedPreferences sharedPref;
     private ApiInterface mService;
     private DrawerLayout dl;
@@ -244,17 +244,34 @@ public class QuestionListActivity extends AppCompatActivity {
                 } else {
                     int statusCode = response.code();
                 }
-                progress.dismiss();
                 mRecyclerView.setVisibility(View.VISIBLE);
                 blank.setVisibility(View.GONE);
+                try {
+                    if ((progress != null) && progress.isShowing()) {
+                        progress.dismiss();
+                    }
+                } catch (final IllegalArgumentException e) {
+                } catch (final Exception e) {
+                } finally {
+                    progress = null;
+                }
             }
 
             @Override
             public void onFailure(Call<QuestionResponseObject> call, Throwable t) {
-                progress.dismiss();
                 Toast.makeText(QuestionListActivity.this, "No Internet", Toast.LENGTH_SHORT).show();
                 mRecyclerView.setVisibility(View.VISIBLE);
+                try {
+                    if ((progress != null) && progress.isShowing()) {
+                        progress.dismiss();
+                    }
+                } catch (final IllegalArgumentException ignored) {
+                } catch (final Exception ignored) {
+                } finally {
+                    progress = null;
+                }
             }
+
         });
 
 
