@@ -10,7 +10,7 @@ $ git clone https://github.com/ashutosh160798/TheStackOverflowApp.git
 ## Screenshots
 <img src="https://user-images.githubusercontent.com/35541355/55718197-cdcd2780-5a18-11e9-9c7a-956cf358b532.png" width="250px" height="400px" />&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/35541355/55718199-cdcd2780-5a18-11e9-9ca3-fa49af9dcae0.png" width="250px" height="400px" />&nbsp;&nbsp;
-<img src="https://user-images.githubusercontent.com/35541355/55718201-ce65be00-5a18-11e9-9265-dc18d43131b2.png" width="250px" height="400px" />&nbsp;&nbsp;
+<img src="https://user-images.githubusercontent.com/35541355/55718877-6e701700-5a1a-11e9-9f2b-677becd8dae5.png" width="250px" height="400px" />&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/35541355/55718202-ce65be00-5a18-11e9-8252-f76880798372.png" width="250px" height="400px" />&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/35541355/55718203-ce65be00-5a18-11e9-8a6e-6ace35ca621b.png" width="250px" height="400px" />&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/35541355/55718262-f6552180-5a18-11e9-94b0-03017969ce40.png" width="250px" height="400px" />&nbsp;&nbsp;
