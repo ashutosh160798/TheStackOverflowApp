@@ -70,7 +70,7 @@ public class QuestionListActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences("tags", Context.MODE_PRIVATE);
         boolean hasVisited = sharedPref.getBoolean("HAS_VISITED_BEFORE", false);
         if (!hasVisited) {
-            Snackbar.make(dl, "Long press the question to save online!", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(dl, "Long press the question to save offline!", Snackbar.LENGTH_LONG).show();
             sharedPref.edit().putBoolean("HAS_VISITED_BEFORE", true).apply();
         }
         if (tag.equals("")) {
