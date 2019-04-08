@@ -68,13 +68,23 @@ public class UserInterestActivity extends AppCompatActivity {
             @Override
             public void onTagClick(String name) {
 
+                if (selectedTagsLL.getChildAt(0) != null && selectedTagsLL.getChildAt(0).getTag().equals(name) ||
+                        selectedTagsLL.getChildAt(1) != null && selectedTagsLL.getChildAt(1).getTag().equals(name) ||
+                        selectedTagsLL.getChildAt(2) != null && selectedTagsLL.getChildAt(2).getTag().equals(name) ||
+                        selectedTagsLL.getChildAt(3) != null && selectedTagsLL.getChildAt(3).getTag().equals(name)) {
+                    Toast.makeText(UserInterestActivity.this, "Choose unique tags", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (selectedTagsLL.getChildCount() < 4) {
                     //set the properties for button
                     final Button btnTag = new Button(UserInterestActivity.this);
                     btnTag.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-                    btnTag.setText(String.format("%s X", name));
+                    btnTag.setText(String.format("%s", name));
+                    btnTag.setPadding(0, 0, 6, 0);
                     btnTag.setTag(name);
                     btnTag.setBackgroundResource(R.drawable.btn_rounded_orange);
+                    btnTag.setCompoundDrawablesWithIntrinsicBounds(0, 0, android.R.drawable.ic_menu_close_clear_cancel, 0);
                     //add button to the layout
                     selectedTagsLL.addView(btnTag);
 

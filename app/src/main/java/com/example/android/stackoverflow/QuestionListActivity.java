@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteConstraintException;
 import android.net.ConnectivityManager;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -56,7 +58,7 @@ public class QuestionListActivity extends AppCompatActivity {
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
-    private String tag;
+    private String tag = "";
     private QuestionDatabase questionDatabase;
     private TextView blank;
 
@@ -64,18 +66,20 @@ public class QuestionListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_list);
+        dl = findViewById(R.id.activity_main);
         sharedPref = getSharedPreferences("tags", Context.MODE_PRIVATE);
         boolean hasVisited = sharedPref.getBoolean("HAS_VISITED_BEFORE", false);
         if (!hasVisited) {
-            Toast.makeText(this, "Long press Question to save offline.", Toast.LENGTH_SHORT).show();
+            Snackbar.make(dl, "Long press the question to save online!", Snackbar.LENGTH_LONG).show();
             sharedPref.edit().putBoolean("HAS_VISITED_BEFORE", true).apply();
         }
-        tag = sharedPref.getString("tag1", "");
+        if (tag.equals("")) {
+            tag = sharedPref.getString("tag1", "");
+        }
         mService = ApiUtils.getSOService();
         questionDatabase = Room.databaseBuilder(getApplicationContext(), QuestionDatabase.class, DATABASE_NAME)
                 .fallbackToDestructiveMigration()
                 .build();
-        dl = findViewById(R.id.activity_main);
         t = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
 
         blank = findViewById(R.id.blank_tv);
@@ -96,10 +100,12 @@ public class QuestionListActivity extends AppCompatActivity {
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                finish();
-                overridePendingTransition(0, 0);
-                startActivity(getIntent());
-                overridePendingTransition(0, 0);
+                if (!isNetworkConnected()) {
+                    finish();
+                    overridePendingTransition(0, 0);
+                    startActivity(getIntent());
+                    overridePendingTransition(0, 0);
+                }
                 int id = item.getItemId();
                 switch (id) {
                     case MENU_FIRST:
@@ -301,5 +307,13 @@ public class QuestionListActivity extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         return cm.getActiveNetworkInfo() != null;
+    }
+
+    public void onBackPressed() {
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
+
     }
 }
